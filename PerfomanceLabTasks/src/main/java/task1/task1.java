@@ -1,8 +1,10 @@
 package task1;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static task1.taskHelpers.ArrayHelper.*;
+import static task1.taskHelpers.GlobalTaskHelper.*;
 
 public class task1 {
     static class myCircularList<T extends Number> {
@@ -120,13 +122,20 @@ public class task1 {
         }
     }
     public static void main(String[] args) {
-        myCircularList<Integer> list = new myCircularList<>(5, 4);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Are uou going to check realization with custom circle collection or using array only?");
+        System.out.println("[1] custom collection");
+        System.out.println("[2] array only");
+        String answer = scanner.next();
+        switch(answer) {
+            case "1": customCollectionRealisation(); break;
+            case "2": arrayRealisation(); break;
 
-        list.showIntervals();
-        System.out.println(list);
+        }
+        main(new String[0]);
     }
 
-    private void arrayRealisation() {
+    private static void arrayRealisation() {
         StringBuilder route = new StringBuilder();
         int pointer = 0, counter = 1;
         int[] circleArray = arrayInitialization();
@@ -153,9 +162,9 @@ public class task1 {
         System.out.println("Route is " + route);
     }
 
-    private void customCollectionRealisation() {
-        myCircularList<Integer> list = new myCircularList<>(5, 4);
-        list.makeIntervals();
+    private static void customCollectionRealisation() {
+        getSizesFromConsole();
+        myCircularList<Integer> list = new myCircularList<>(getArraySize(), getIntervalSize());
         list.showIntervals();
         System.out.println(list);
     }
