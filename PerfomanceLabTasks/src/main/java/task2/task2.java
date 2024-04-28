@@ -4,12 +4,15 @@ import task2.Enums.ParamNamesEnum;
 import task2.Enums.PointLocationEnum;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public class task2 {
     static class Circle {
@@ -77,7 +80,14 @@ public class task2 {
     }
 
     public static void main(String[] args) {
-        Circle circle = new Circle (new File("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\java\\task2\\files\\circle"));
-        circle.definePointsLocation(new File("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\java\\task2\\files\\points"));
+       // Circle circle = new Circle (new File("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\java\\task2\\files\\circle"));
+        Properties props = new Properties();
+        try (InputStream in = Files.newInputStream(Paths.get("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\resources\\task2\\cirleTaskPathes.properties"))) {
+            props.load(in);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Circle circle = new Circle (new File(props.getProperty("circle")));
+        circle.definePointsLocation(new File(props.getProperty("points")));
     }
 }
