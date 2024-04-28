@@ -80,7 +80,6 @@ public class task2 {
     }
 
     public static void main(String[] args) {
-       // Circle circle = new Circle (new File("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\java\\task2\\files\\circle"));
         Properties props = new Properties();
         try (InputStream in = Files.newInputStream(Paths.get("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\resources\\task2\\cirleTaskPathes.properties"))) {
             props.load(in);
