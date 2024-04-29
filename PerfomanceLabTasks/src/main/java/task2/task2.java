@@ -81,7 +81,7 @@ public class task2 {
 
     public static void main(String[] args) {
         Properties props = new Properties();
-        try (InputStream in = Files.newInputStream(Paths.get("C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\resources\\task2\\cirleTaskPathes.properties"))) {
+        try (InputStream in = Files.newInputStream(Paths.get("src/main/resources/circleTaskPaths.properties"))) {
             props.load(in);
         } catch (IOException e) {
             throw new RuntimeException(e);

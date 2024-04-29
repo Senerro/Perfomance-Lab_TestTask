@@ -1,19 +1,19 @@
 package task4;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.Math.abs;
 
 public class task4 {
     private final static ArrayList<Integer> list = new ArrayList<>();
 
-    private static void fillInTestCollection(String path) {
+    private static void fillInCollection(String path) {
         List<String> dataList = getDataFromFileByCommandLine(path);
         for (var element : dataList)
             list.add(Integer.parseInt(element));
@@ -64,17 +64,22 @@ public class task4 {
     }
 
     private static void showInformation(int step) {
+        showInformation();
+        System.out.println("Minimum count of step is " + step);
+    }
+
+    private static void showInformation() {
         System.out.print("Current array is ");
         System.out.print("[ ");
         for (var element : list)
             System.out.print(element + " ");
         System.out.println("]");
-        System.out.println("Minimum count of step is " + step);
     }
 
-    public static void invokeLogic() {
+    private static void invokeLogic() {
         var path = getPathToFile();
-        fillInTestCollection(path);
+        fillInCollection(path);
+        showInformation();
         int baseElement = getBaseElement();
         var steps = calculateStepsAndBriningToBaseElement(baseElement);
         showInformation(steps);
@@ -90,7 +95,15 @@ public class task4 {
         System.out.println("[2] write down the path");
         String answer = scanner.next();
         switch (answer) {
-            case "1": path = "C:\\Perfomance lab\\Perfomance-Lab_TestTask\\PerfomanceLabTasks\\src\\main\\resources\\array";
+
+            case "1":
+                Properties properties = new Properties();
+                try {
+                    properties.load(new FileReader("src/main/resources/arrayLocation.properties"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                path = properties.getProperty("array");
             break;
             case "2": path = scanner2.nextLine();
             break;
