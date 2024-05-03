@@ -1,8 +1,5 @@
 package task4;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -63,56 +60,9 @@ public class task4 {
         return step;
     }
 
-    private static void showInformation(int step) {
-        showInformation();
-        System.out.println("Minimum count of step is " + step);
-    }
-
-    private static void showInformation() {
-        System.out.print("Current array is ");
-        System.out.print("[ ");
-        for (var element : list)
-            System.out.print(element + " ");
-        System.out.println("]");
-    }
-
-    private static void invokeLogic() {
-        var path = getPathToFile();
-        fillInCollection(path);
-        showInformation();
-        int baseElement = getBaseElement();
-        var steps = calculateStepsAndBriningToBaseElement(baseElement);
-        showInformation(steps);
-    }
-
-    private static String getPathToFile() {
-        Scanner scanner = new Scanner(System.in);
-        Scanner scanner2 = new Scanner(System.in);
-        String path = "";
-
-        System.out.println("Are you going to use default file or write down the path yourself");
-        System.out.println("[1] default file");
-        System.out.println("[2] write down the path");
-        String answer = scanner.next();
-        switch (answer) {
-
-            case "1":
-                Properties properties = new Properties();
-                try {
-                    properties.load(new FileReader("src/main/resources/arrayLocation.properties"));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                path = properties.getProperty("array");
-            break;
-            case "2": path = scanner2.nextLine();
-            break;
-            default: System.out.println("Wrong answer"); getPathToFile();
-        }
-        return path;
-    }
-
     public static void main(String[] args) {
-        invokeLogic();
+        fillInCollection(args[0]);
+        int baseElement = getBaseElement();
+        System.out.println(calculateStepsAndBriningToBaseElement(baseElement));
     }
 }
